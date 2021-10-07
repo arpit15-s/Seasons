@@ -1,0 +1,39 @@
+* {
+    box-sizing: border-box;
+}
+
+.top-left {
+    position:absolute;
+    top: 10px;
+    left: 10px
+}
+
+.bottom-right {
+    position:absolute;
+    right: 10px;
+    bottom: 10px
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.winter {
+    background-color: rgb(189, 227, 252);
+}
+
+.summer {
+    background-color: orange;
+}
+
+.winter .massive {
+    color: rgb(11, 97, 177);
+}
+
+.summer .massive {
+    color: rgb(214, 81, 28);
+}
+/* export default seasonStyle; */

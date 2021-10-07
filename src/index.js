@@ -1,6 +1,7 @@
 import react from 'react';
 import reactDOM from 'react-dom';
-import season from './season'
+import Season from './season';
+import Loader from './loader'
 
 // const App = () => {
 //     window.navigator.geolocation.getCurrentPosition(
@@ -14,21 +15,30 @@ import season from './season'
 // }
 
 class App extends react.Component{
-    constructor(props){
-        super(props);
+    // constructor(props){
+    //     super(props);
 
-        this.state = {lat: null, errorMessage: ''};
-    }
+    //     this.state = {lat: null, errorMessage: ''};
+    // }
+    state = { lat: null, errorMessage: '' };
+
+    // Lifecycle mount function
+    componentDidMount() {
+        window.navigator.geolocation.getCurrentPosition(
+            position => this.setState({ lat: position.coords.latitude }),
+            err => this.setState({ errorMessage: err.message })
+        );
+    };
 //react says we have to define render!!!
     render(){
-        window.navigator.geolocation.getCurrentPosition(
-            position => {
-                this.setState({lat: position.coords.latitude});
-            },
-            err => {
-                this.setState({errorMessage: err.message});
-            }
-        );
+        // window.navigator.geolocation.getCurrentPosition(
+        //     position => {
+        //         this.setState({lat: position.coords.latitude});
+        //     },
+        //     err => {
+        //         this.setState({errorMessage: err.message});
+        //     }
+        // );
 
         // return (
         //     <div>
@@ -38,11 +48,13 @@ class App extends react.Component{
         //     </div>
         // );
         if (this.state.lat)
-            return <div>Latitude: {this.state.lat}</div>;
+            return <Season lat={this.state.lat} />;
         if (this.state.errorMessage)
             return <div>Latitude: {this.state.errorMessage}</div>;
-        return <div>Loading...</div>;
+        return <Loader message = "Please Accept the Location Request!"/>;
     }
 }
+
+
 
 reactDOM.render(<App />, document.querySelector('#root'))
